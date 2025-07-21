@@ -37,8 +37,7 @@ fi
 
 - Se a linha do comando já existe, não altera nada e informa que está tudo ok.
 
-- Caso contrário, insere a configuração necessária para que o NRPE saiba executar o plugin check_time_sync
-///
+- Caso contrário, insere a configuração necessária para que o NRPE saiba executar o plugin check_time_syn
 - **E por fim o Plugin**
 check_time_sinc
 
