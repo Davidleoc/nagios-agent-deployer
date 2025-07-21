@@ -40,7 +40,7 @@ fi
 - Caso contrário, insere a configuração necessária para que o NRPE saiba executar o plugin check_time_syn
 
 - **E por fim o Plugin**
-'check_time_sinc'
+`check_time_sinc`
 
 ```bash
 
