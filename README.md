@@ -34,14 +34,15 @@ if ! sudo grep -Fxq "$LINE3" "$CONFIG_FILE"; then
 else
     echo "As linhas já existem. Nada foi alterado."
 fi
-
+```
 - Se a linha do comando já existe, não altera nada e informa que está tudo ok.
 
 - Caso contrário, insere a configuração necessária para que o NRPE saiba executar o plugin check_time_syn
+
 - **E por fim o Plugin**
 check_time_sinc
 
-#!/bin/bash
+```bash
 
 EXIT_CODE=0
 
@@ -102,7 +103,7 @@ else
 fi
 
 exit $EXIT_CODE
-
+```
 - Detecta qual serviço NTP está ativo (systemd-timesyncd, ntp, chronyd)
 
 - Verifica se o serviço está rodando
