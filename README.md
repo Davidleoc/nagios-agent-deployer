@@ -44,16 +44,18 @@ fi
 
 ```bash
 
+#!/bin/bash
+
 EXIT_CODE=0
 
 # Função para checar status de um serviço
 check_service() {
     local svc=$1
     if systemctl is-active --quiet "$svc"; then
-        echo "OK: Serviço '$svc' está ativo."
+        echo "OK: Servico '$svc' esta ativo."
         return 0
     else
-        echo "WARNING: Serviço '$svc' não está ativo."
+        echo "WARNING: Servico '$svc' nao esta ativo."
         return 1
     fi
 }
@@ -67,7 +69,7 @@ elif systemctl is-active --quiet ntp; then
 elif systemctl is-active --quiet chronyd; then
     NTP_SERVICE="chronyd"
 else
-    echo "CRITICAL: Nenhum serviço NTP reconhecido encontrado."
+    echo "CRITICAL: Nenhum servico NTP reconhecido encontrado."
     exit 2
 fi
 
@@ -78,15 +80,15 @@ fi
 
 # Verifica sincronização (funciona com systemd)
 SYNC_STATUS=$(timedatectl show -p NTPSynchronized --value 2>/dev/null)
-if [ "$SYNC_STATUS" == "yes" ]; then
-    echo "OK: Relógio do sistema está sincronizado."
+if [ "$SYNC_STATUS" = "yes" ]; then
+    echo "OK: Relogio do sistema esta sincronizado."
 else
-    echo "CRITICAL: Relógio do sistema NÃO está sincronizado."
+    echo "CRITICAL: Relogio do sistema NAO esta sincronizado."
     EXIT_CODE=2
 fi
 
-# Se o serviço for systemd-timesyncd, exibe mais informações
-if [ "$NTP_SERVICE" == "systemd-timesyncd" ]; then
+# Coleta informações se for systemd-timesyncd
+if [ "$NTP_SERVICE" = "systemd-timesyncd" ]; then
     TIMESYNC_DATA=$(timedatectl show-timesync --all 2>/dev/null)
 
     SERVER_NAME=$(echo "$TIMESYNC_DATA" | grep '^ServerName=' | cut -d= -f2)
@@ -103,6 +105,7 @@ else
 fi
 
 exit $EXIT_CODE
+
 ```
 - Detecta qual serviço NTP está ativo (systemd-timesyncd, ntp, chronyd)
 
